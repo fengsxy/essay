@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Diffusion LLM分析"
+title: "Diffusion LLM 深度理解1.0"
 date: 2025-11-08
-description: "??DLLM???????????"
+description: "所有关于DLLM的理解在这了"
 tags: [life, entrepreneur, cn]
 lang: cn
 ---
