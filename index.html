@@ -3,21 +3,23 @@ layout: default
 title: "The Ph.D. with a Thousand Faces"
 description: "Chalk uses all the best tools and merges them into one premium blogging theme."
 lang: zh
-alternate_en: /index_en.html
-lang_redirect_target: /index_en.html
 ---
 
 <ul class="article-list">
   {% for post in paginator.posts %}
     {% assign post_lang = post.lang | default: '' | downcase %}
+    {% assign lang_prefix = post_lang | slice: 0, 2 %}
+    {% assign post_path = post.path | default: '' | downcase %}
     {% assign has_en_tag = false %}
     {% for tag in post.tags %}
-      {% if tag | downcase == 'en' %}
+      {% assign normalized_tag = tag | downcase %}
+      {% if normalized_tag == 'en' or normalized_tag == 'english' %}
         {% assign has_en_tag = true %}
         {% break %}
       {% endif %}
     {% endfor %}
-    {% if post_lang == 'en' or has_en_tag %}
+    {% assign is_english_post = has_en_tag or lang_prefix == 'en' or post_path contains '_en.' %}
+    {% if is_english_post %}
       {% continue %}
     {% endif %}
     <li class="article-list-item reveal">
