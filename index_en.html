@@ -8,18 +8,15 @@ permalink: /index_en.html
 ---
 
 <div class="article-list-intro">
-  <p>This is the English-only homepage. Prefer Chinese? <a href="{{ '/' | relative_url }}">Go back to 中文站</a>.</p>
+  <p>This is the English-only homepage. Prefer Chinese? <a href="{{ '/' | relative_url }}">Go back to &#x4E2D;&#x6587;&#x7AD9;</a>.</p>
 </div>
 
-{% assign english_posts = site.posts | where_exp: "post", "post.lang == 'en' or post.tags contains 'en'" %}
+{% assign english_found = false %}
 <ul class="article-list">
-  {% if english_posts == empty %}
-    <li class="article-list-item reveal">
-      <h5>English posts are coming soon.</h5>
-      <p>Add posts with <code>lang: en</code> or an <code>en</code> tag to populate this feed automatically.</p>
-    </li>
-  {% else %}
-    {% for post in english_posts %}
+  {% for post in site.posts %}
+    {% assign post_lang = post.lang | default: '' | downcase %}
+    {% if post_lang == 'en' or post.tags contains 'en' %}
+      {% assign english_found = true %}
       <li class="article-list-item reveal">
         <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
           <h5>
@@ -49,6 +46,12 @@ permalink: /index_en.html
           </div>
         </div>
       </li>
-    {% endfor %}
-  {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% unless english_found %}
+    <li class="article-list-item reveal">
+      <h5>English posts are coming soon.</h5>
+      <p>Add posts with <code>lang: en</code> or an <code>en</code> tag to populate this feed automatically.</p>
+    </li>
+  {% endunless %}
 </ul>
