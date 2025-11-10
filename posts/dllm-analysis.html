@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Longxuan Yu | Diffusion LLM 深度理解1.0</title>
+  <meta name="description" content="所有关于DLLM的理解在这了">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta property="og:title" content="Diffusion LLM 深度理解1.0">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://fengsxy.github.io//essay/posts/dllm-analysis">
+  <meta property="og:description" content="所有关于DLLM的理解在这了">
+  <meta property="og:site_name" content="Longxuan Yu">
+  <meta property="og:image" content="https://fengsxy.github.io//essay/assets/og-image.jpg">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:url" content="https://fengsxy.github.io//essay/posts/dllm-analysis">
+  <meta name="twitter:title" content="Diffusion LLM 深度理解1.0">
+  <meta name="twitter:description" content="所有关于DLLM的理解在这了">
+  <meta name="twitter:image" content="https://fengsxy.github.io//essay/assets/og-image.jpg">
+
+  <link rel="apple-touch-icon" href="/essay/assets/apple-touch-icon.png">
+  <link href="https://fengsxy.github.io//essay/feed.xml" type="application/rss+xml" rel="alternate" title="Longxuan Yu Last 10 blog posts" />
+  
+  
+
+  
+
+  
+    <link type="text/css" rel="stylesheet" href="/essay/assets/light.css">
+  
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-150720233-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-150720233-1');
+</script>
+
+
+  		<!-- Start of Woopra Code -->
+      <script>
+        (function(){
+                var t,i,e,n=window,o=document,a=arguments,s="script",r=["config","track","identify","visit","push","call","trackForm","trackClick"],c=function(){var t,i=this;for(i._e=[],t=0;r.length>t;t++)(function(t){i[t]=function(){return i._e.push([t].concat(Array.prototype.slice.call(arguments,0))),i}})(r[t])};for(n._w=n._w||{},t=0;a.length>t;t++)n._w[a[t]]=n[a[t]]=n[a[t]]||new c;i=o.createElement(s),i.async=1,i.src="//static.woopra.com/js/w.js",e=o.getElementsByTagName(s)[0],e.parentNode.insertBefore(i,e)
+        })("woopra");
+    
+        woopra.config({
+            domain: 'shift-3.com'
+        });
+        woopra.track();
+        </script>
+        <!-- End of Woopra Code -->
+
+    <div id="google_translate_element"></div>
+    <script>
+			function googleTranslateElementInit() {
+			new google.translate.TranslateElement({pageLanguage: 'cn', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+			}
+    </script>
+    <script src="http://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+    #google_translate_element img {
+      display: inline-block;
+    }
+    </style>
+</head>
+
+
+
+
+
+
+
+<body>
+  <main role="main">
+    <div class="grid grid-centered">
+      <div class="grid-cell">
+        
+<nav class="header-nav reveal">
+  <a href="/essay/" class="header-logo" title="Longxuan Yu">Longxuan Yu</a>
+  <ul class="header-links">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      <li>
+        <a href="/essay/feed.xml" target="_blank" title="RSS">
+          <span class="icon icon-social-rss"></span>
+        </a>
+      </li>
+    
+    
+  </ul>
+</nav>
+
+        <article class="article reveal">
+          <header class="article-header">
+            <h1>Diffusion LLM 深度理解1.0</h1>
+            <p>所有关于DLLM的理解在这了</p>
+            <div class="article-list-footer">
+              <span class="article-list-date">
+                November 8, 2025
+              </span>
+              <span class="article-list-divider">-</span>
+              <span class="article-list-minutes">
+                
+                
+                  1 minute read
+                
+              </span>
+              <span class="article-list-divider">-</span>
+              <div class="article-list-tags">
+                
+                  <a href="/essay/tag/life">life</a>
+                
+                  <a href="/essay/tag/entrepreneur">entrepreneur</a>
+                
+                  <a href="/essay/tag/cn">cn</a>
+                
+              </div>
+            </div>
+          </header>
+
+          <div class="article-content">
+            <h3 id="dllm的优点是什么dllm目前fundamental的问题是什么-dllm-work了吗">Dllm的优点是什么？Dllm目前fundamental的问题是什么？ Dllm work了吗？</h3>
+
+<p>提到做dllm motivation一般可以提到几点，</p>
+<ul>
+  <li>第一，快，他是一个并行生成过程，32token一起生成是肯定比一个token一个token生成要更快的，</li>
+  <li>第二，好，好来自于训练数据的增强，利用程度更高。
+理论来说我mask给予了数据更复杂的训练模式，原本我只需要学会根据前面预测后面，现在我还要学会根据后面预测前面，这本身是更多的训练任务，对已经有的足量的数据的更充分的利用，其实在使用生成数据增强模型的时候也有一种可能是生成出和训练时候在模式上不相符合的数据，但意思上符合的数据用于增强。</li>
+  <li>第三，灵活，其实不同的任务是不同的任务难度的，有很多任务其实很简单，但是我受限于token的吞吐我再聪明我也只能一句话一句话说，而dllm的灵活属性让我有机会能一下子全吐出来。</li>
+  <li>第四， dllm的表征能力，dllm由于其双向注意力特点以及特殊的训练模式，导致了他单个hidedn space要比decoder only架构要强，天然达到了的llm2vec级别的能力，意味着表征这件事情也有了scale的潜力</li>
+</ul>
+
+<h3 id="dllm的问题是什么">dllm的问题是什么？</h3>
+
+<ul>
+  <li>
+    <p>第一，<strong>dllm其实并不快</strong>，传统AR模型之所以快是因为可以使用KV Cache技术，而Dllm的并行决定了他先天是反KV Cache的，而我就算是32个token一起生成，但是我也需要多轮，这就意味着之前的KV Cache在下一步迭代的时候就已经改变了，并不能复用。 目前LLaDa的结果就是如果我需要生成32个token那就需要32个step,每一个step都是0KV Cache复用。
+Fast Dllm大概提出了一种解决方法就是近似KV Cache就是虽然变了但是变得不多，所以我可以使用上一步的KV Cache，其次是类似discrete diffusion forcing的idea就是我可以先block diffusion 生成 所有生成完成的我让他有kv cache，其次是我可以尝试建立hierarchical kv cache的结构，已经生成完成的可以用kv cahce的，然后生成可以是两个block并行的，block间可以有一些近似的kv cache，这样就是fast dllm v2的idea。
+那么原版本的llada究竟有多慢呢？这么说吧discrete diffusion forcing 号称他们的model比原版本的llada快50x倍，但实际上也就是比AR快2倍，而fast dllm声称快27倍，换句话说速度不如ar快。
+那么为啥Gemini Diffusion的model看起来飞起来了呢？原因是本身AR 7-30B之间的模型上线可能是1s 300 -500 token在openrounter中，理论上我训一个同等大小的模型，做一些列fancy的优化最后应该是可以收益到一个1000-2000 token/s的生成速度，这也就是目前展示diffusion model的速度。</p>
+  </li>
+  <li>
+    <p>第二，dllm其实有<strong>更高的峰值显存占用</strong>，dllm在同等条件达到显存的峰值，原因是因为block内的attention在并行计算，他会有block size倍数 activation峰值，这也就是说单卡能跑的最长文本其实很有限，目前fast dllm系列的评测基本上都是在512长度测试，并没有在类似10K，100K的场景测试。</p>
+  </li>
+  <li>
+    <p>第三，实际上生产场景我们可能损失了更多，那我们给同一个GPU多个用户的时候，我们会发现随着batch的上升，Dllm的生成速度会逐渐落后于AR model，这是因为当batch上升的时候，我们batch内本身在并行的，这种并行性随着batch上升被利用起来了。</p>
+  </li>
+  <li>
+    <p>第四，另一种技术加速技术，投机采样，理论上可以给ar模型带来2-3倍的加速收益，这个收益和dllm的收益是近似的。</p>
+  </li>
+</ul>
+
+<h3 id="当前dllm的科研改进路线">当前DLLM的科研改进路线：</h3>
+
+<ol>
+  <li>remask之后丢失之前预测的信息，之前预测的信息理论上是一种中间状态，他是错误的但是是有用的。我们希望能够把这个中间状态用上，让他变成连续状态。</li>
+  <li>已经存在的文本不值得百分之百的信任，虽然传统的LLaDa可以改动已经生成好的文本，但是他在训练的过程中实际上并没有训练过改动已经生成好的文字的能力。他只训练了改Mask的能力。</li>
+  <li>dllm由于kv cahce的先天限制她最后就一定是block diffusion 的形式，那么他如何构建一个最优生成顺序机理，何时决定AR，何时决定block，如何决定block大小，并且如何在决定最优生成顺序的时候考虑到KV Cache的优化。</li>
+  <li>dllm如何做到插入删除操作，并且做这些操作的时候如何考虑到KV Cache复用等问题</li>
+</ol>
+
+<h3 id="当前dllm分析类问题">当前DLLM分析类问题：</h3>
+
+<ol>
+  <li>从AR model fine-tune到dllm 是否具备scale的特性，我能否在100B level获得一个同等级别的dllm，需要用多少token，这些token需要具备什么特性。</li>
+  <li>dllm自带的ar和原本的ar有没有什么区别，是否具备更高的压缩性，如果是KV Cache的话能否删除更大量的KV Cache</li>
+  <li>dllm如果能实现一个laltent embedding的中间状态，是不是意味着large concept model，latent reasoning等问题能够在这种架构下work</li>
+  <li>dllm天然加速类问题是不是是Agent最后一块拼图，agent 的特性是长文本，高latency要求，高智能要求，dllm能够做好压缩和加速的话</li>
+  <li>为什么latent reasoning是不work的，但是我把图像转成连续空间的token塞到网络就又是work的？</li>
+</ol>
+
+
+          </div>
+
+          <div class="article-share">
+            
+            <a href="" title="Share on Twitter" onclick="window.open('https://twitter.com/home?status=Diffusion LLM 深度理解1.0 - https://fengsxy.github.io//essay/posts/dllm-analysis ', 'newwindow', 'width=500, height=225'); return false;" data-turbolinks="false">
+              <svg enable-background="new 0 0 128 128" width="15px" version="1.1" viewBox="0 0 128 128" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="_x37__stroke"><g id="Twitter"><rect clip-rule="evenodd" fill="none" fill-rule="evenodd" height="128" width="128"/><path clip-rule="evenodd" d="M128,23.294    c-4.703,2.142-9.767,3.59-15.079,4.237c5.424-3.328,9.587-8.606,11.548-14.892c-5.079,3.082-10.691,5.324-16.687,6.526    c-4.778-5.231-11.608-8.498-19.166-8.498c-14.493,0-26.251,12.057-26.251,26.927c0,2.111,0.225,4.16,0.676,6.133    C41.217,42.601,21.871,31.892,8.91,15.582c-2.261,3.991-3.554,8.621-3.554,13.552c0,9.338,4.636,17.581,11.683,22.412    c-4.297-0.131-8.355-1.356-11.901-3.359v0.331c0,13.051,9.053,23.937,21.074,26.403c-2.201,0.632-4.523,0.948-6.92,0.948    c-1.69,0-3.343-0.162-4.944-0.478c3.343,10.694,13.035,18.483,24.53,18.691c-8.986,7.227-20.315,11.533-32.614,11.533    c-2.119,0-4.215-0.123-6.266-0.37c11.623,7.627,25.432,12.088,40.255,12.088c48.309,0,74.717-41.026,74.717-76.612    c0-1.171-0.023-2.342-0.068-3.49C120.036,33.433,124.491,28.695,128,23.294" fill-rule="evenodd" id="Twitter_1_"/></g></g></svg>
+            </a>
+            <a href="" title="Share on Facebook" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=https://fengsxy.github.io//essay/posts/dllm-analysis', 'newwindow', 'width=500, height=500'); return false;" data-turbolinks="false">
+              <svg enable-background="new 0 0 128 128" width="15px" version="1.1" viewBox="0 0 128 128" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="_x31__stroke"><g id="Facebook_1_"><rect fill="none" height="128" width="128"/><path clip-rule="evenodd" d="M68.369,128H7.065C3.162,128,0,124.836,0,120.935    V7.065C0,3.162,3.162,0,7.065,0h113.871C124.837,0,128,3.162,128,7.065v113.87c0,3.902-3.163,7.065-7.064,7.065H88.318V78.431    h16.638l2.491-19.318H88.318V46.78c0-5.593,1.553-9.404,9.573-9.404l10.229-0.004V20.094c-1.769-0.235-7.841-0.761-14.906-0.761    c-14.749,0-24.846,9.003-24.846,25.535v14.246H51.688v19.318h16.681V128z" fill-rule="evenodd" id="Facebook"/></g></g></svg>
+            </a>
+            <a href="" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=https://fengsxy.github.io//essay/posts/dllm-analysis', 'newwindow', 'width=550, height=400'); return false;" data-turbolinks="false">
+              <svg enable-background="new 0 0 128 128" version="1.1" viewBox="0 0 128 128" width="20px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="_x35__stroke"><g id="Google_Plus"><rect clip-rule="evenodd" fill="none" fill-rule="evenodd" height="128" width="128"/><path clip-rule="evenodd" d="M40.654,55.935v16.13    c0,0,15.619-0.021,21.979-0.021C59.189,82.5,53.834,88.194,40.654,88.194c-13.338,0-23.748-10.832-23.748-24.194    s10.41-24.194,23.748-24.194c7.052,0,11.607,2.483,15.784,5.944c3.344-3.35,3.065-3.828,11.573-11.877    c-7.222-6.586-16.822-10.6-27.357-10.6C18.201,23.273,0,41.507,0,64c0,22.493,18.201,40.727,40.654,40.727    c33.561,0,41.763-29.275,39.044-48.792H40.654z M113.912,56.742V42.628h-10.063v14.113H89.358v10.081h14.491v14.517h10.063V66.823    H128V56.742H113.912z" fill-rule="evenodd" id="Google_Plus_1_"/></g></g></svg>
+            </a>
+          </div>
+
+          
+            <div id="disqus_thread" class="article-comments"></div>
+            <script>
+              (function() {
+                  var d = document, s = d.createElement('script');
+                  s.src = '//http-blog-xiaoyu.disqus.com/embed.js';
+                  s.setAttribute('data-timestamp', +new Date());
+                  (d.head || d.body).appendChild(s);
+              })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          
+        </article>
+        <footer class="footer reveal">
+  <p>
+    Proudly powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/nielsenramon/chalk" target="_blank">Chalk</a>. © 2017  
+  </p>
+</footer>
+
+      </div>
+    </div>
+  </main>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Cormorant Garamond:700', 'Lato:300,400,700']
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript" src="/essay/assets/vendor.js"></script>
+<script type="text/javascript" src="/essay/assets/application.js"></script>
+
+</body>
+</html>

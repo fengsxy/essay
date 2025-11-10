@@ -1,4 +1,0 @@
----
-slug: phd
-name: PhD
----

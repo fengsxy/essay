@@ -1,4 +1,0 @@
----
-slug: cn
-name: cn
----

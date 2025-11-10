@@ -1,20 +1,58 @@
----
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
-    <title>{{ site.name | xml_escape }}</title>
-    <description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
-    <link>{{ site.url }}</link>
-    <atom:link href="{{ page.path | absolute_url }}" rel="self" type="application/rss+xml" />
-    {% for post in site.posts limit:10 %}
+    <title>Longxuan Yu</title>
+    <description></description>
+    <link>https://fengsxy.github.io/</link>
+    <atom:link href="https://fengsxy.github.io//essay/feed.xml" rel="self" type="application/rss+xml" />
+    
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.description | xml_escape }}</description>
-        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | absolute_url }}</link>
-        <guid isPermaLink="true">{{ post.url | absolute_url }}</guid>
+        <title>Beyond High Intelligence, Humans and Models Both Need High Agency</title>
+        <description>Agency Evaluation</description>
+        <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
+        <link>https://fengsxy.github.io//essay/posts/agency-evaluition-en</link>
+        <guid isPermaLink="true">https://fengsxy.github.io//essay/posts/agency-evaluition-en</guid>
       </item>
-    {% endfor %}
+    
+      <item>
+        <title>High Intelligence之外，模型和人都需要High Agency</title>
+        <description>Agency Evluation</description>
+        <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
+        <link>https://fengsxy.github.io//essay/posts/agency-evaluition</link>
+        <guid isPermaLink="true">https://fengsxy.github.io//essay/posts/agency-evaluition</guid>
+      </item>
+    
+      <item>
+        <title>Why Are Generation and Understanding So Difficult to Unify?</title>
+        <description>Generation, Understanding, and Representation Learning</description>
+        <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
+        <link>https://fengsxy.github.io//essay/posts/generation-vs-understanding-en</link>
+        <guid isPermaLink="true">https://fengsxy.github.io//essay/posts/generation-vs-understanding-en</guid>
+      </item>
+    
+      <item>
+        <title>生成和理解为什么很难统一的？</title>
+        <description>生成理解与表征学习</description>
+        <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
+        <link>https://fengsxy.github.io//essay/posts/generation-vs-understanding</link>
+        <guid isPermaLink="true">https://fengsxy.github.io//essay/posts/generation-vs-understanding</guid>
+      </item>
+    
+      <item>
+        <title>A Deep Dive into Diffusion LLMs 1.0</title>
+        <description>A comprehensive overview of my understanding of DLLMs.</description>
+        <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
+        <link>https://fengsxy.github.io//essay/posts/dllm-analysis-en</link>
+        <guid isPermaLink="true">https://fengsxy.github.io//essay/posts/dllm-analysis-en</guid>
+      </item>
+    
+      <item>
+        <title>Diffusion LLM 深度理解1.0</title>
+        <description>所有关于DLLM的理解在这了</description>
+        <pubDate>Sat, 08 Nov 2025 00:00:00 +0000</pubDate>
+        <link>https://fengsxy.github.io//essay/posts/dllm-analysis</link>
+        <guid isPermaLink="true">https://fengsxy.github.io//essay/posts/dllm-analysis</guid>
+      </item>
+    
   </channel>
 </rss>
